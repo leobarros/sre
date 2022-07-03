@@ -1,2 +1,2 @@
 # sre
-Repotosity to study appications and ideas aboure SRE
+Repository to study applications and ideas about SRE

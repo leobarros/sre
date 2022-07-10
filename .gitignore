@@ -1,5 +1,35 @@
 /.metadata/
 
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@leobarros
+leobarros /
+sre
+Public
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+
+    Settings
+
+sre/.gitignore
+@leobarros
+leobarros ignore java and maven
+Latest commit bc7a14a 5 hours ago
+History
+1 contributor
+45 lines (36 sloc) 687 Bytes
+/.metadata/
+
 # Compiled class file
 *.class
 
@@ -43,3 +73,4 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+

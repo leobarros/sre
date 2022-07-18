@@ -17,4 +17,5 @@ buildNumber.properties
 .classpath
 
 .vscode/
-*.jar
+*/target/*.jar
+*/target/**

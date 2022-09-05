@@ -17,11 +17,26 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.forum.config.security.TokenService;
 import br.com.alura.forum.controller.dto.TokenDto;
 import br.com.alura.forum.controller.form.LoginForm;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 
 @RestController
 @RequestMapping("/auth")
 @Profile(value = {"prod", "test"})
 public class AutenticacaoController {
+
+	Counter authUserSucess;
+	Counter auhtUserErrors;
+
+	public AutenticacaoController(MeterRegistry registry) {
+		authUserSucess = Counter.builder("auth_user_sucess")
+			.description("usuarios autenticados")
+			.register(registry);
+		
+		auhtUserErrors = Counter.builder("auth_user_error")
+			. description("erros de login")
+			.register(registry);
+	}
 	
 	@Autowired
 	private AuthenticationManager authManager;
@@ -35,10 +50,12 @@ public class AutenticacaoController {
 		
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
-			String token = tokenService.gerarToken(authentication); 		
+			String token = tokenService.gerarToken(authentication);
+			authUserSucess.increment();
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 			
 		} catch (AuthenticationException e) {
+			auhtUserErrors.increment();
 			return ResponseEntity.badRequest().build();
 		}
 
